@@ -1,0 +1,135 @@
+.footer {
+    display: block;
+    padding: 60px 0;
+    background-color: #222222;
+    .footer-top {
+        display: flex;
+        .logo-footer {
+            max-width: 200px;
+            img {
+                max-width: 100%;
+            }
+        }
+        .single-contact {
+            margin-top: 30px;
+            ul {
+                display: flex;
+                align-items: center;
+                margin: 0 -15px;
+                li {
+                    display: flex;
+                    flex-direction: column;
+                    label {
+                        color: #c8c8c8;
+                        font-size: 14px;
+                        font-weight: 500;
+                        i {
+                            margin-right: 5px;
+                        }
+                    }
+                    a {
+                        color: #ffffff;
+                        font-weight: 400;
+                        font-size: 18px;
+                    }
+                }
+                @media(max-width:768px) {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    li {
+                        margin-bottom: 15px;
+                    }
+                }
+            }
+        }
+        .form-offer {
+            .title {
+                color: #ffffff;
+                font-size: 20px;
+                text-transform: uppercase;
+                font-weight: 400;
+                margin-bottom: 28px;
+            }
+            .form-contact-special {
+                position: relative;
+                max-width: 420px;
+                .email {
+                    color: #777;
+                    border: 1px solid #656565;
+                    height: 50px;
+                    line-height: 48px;
+                    margin-bottom: 0;
+                    padding-right: 137px;
+                    width: 100%;
+                    padding-left: 20px;
+                    font-size: 13px;
+                    box-shadow: none;
+                    background-color: transparent;
+                    &::placeholder {
+                        color: #c8c8c8;
+                        font-style: italic;
+                    }
+                    &:focus {
+                        border-color: #c5a47e;
+                    }
+                }
+                .btn-contact-special {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    font-weight: 500;
+                    width: 155px;
+                    font-family: 'Renner Medium';
+                    text-align: center;
+                    height: 50px;
+                    line-height: 48px;
+                    padding: 0;
+                    letter-spacing: 1px;
+                    background-color: #c5a47e;
+                    color: #fff;
+                    border: 1px solid #c5a47e;
+                    font-size: 13px;
+                    text-transform: uppercase;
+                }
+            }
+        }
+        @media(max-width:1120px) {
+            flex-direction: column;
+            div {
+                max-width: 100%;
+                flex: 100%;
+            }
+            .form-offer {
+                margin-top: 35px;
+            }
+        }
+    }
+    .footer-bottom {
+        display: flex;
+        align-items: center;
+        padding: 30px 0;
+        color: #c8c8c8;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 15px;
+        line-height: 24px;
+        border-top: 1px solid #c8c8c8;
+        margin-top: 30px;
+        .right {
+            ul {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                li {
+                    margin-left: 24px;
+                    a {
+                        color: currentColor;
+                    }
+                }
+            }
+        }
+        @media(max-width:768px) {
+            flex-direction: column;
+        }
+    }
+}

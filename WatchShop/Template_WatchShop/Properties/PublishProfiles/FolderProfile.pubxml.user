@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\DoAnTotNghiep\public</_PublishTargetUrl>
+    <History>False|2022-05-04T04:03:48.1885803Z;False|2022-05-04T10:56:51.5734792+07:00;False|2022-05-04T10:55:00.6489396+07:00;</History>
+  </PropertyGroup>
+</Project>

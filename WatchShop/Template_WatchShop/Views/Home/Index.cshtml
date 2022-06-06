@@ -1,0 +1,231 @@
+﻿@using ProjectLibrary.Config
+@using Template_WatchShop.Controllers
+@using Template_WatchShop.Models
+@using ProjectLibrary.Database
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<ShowObject> watchesHot = CommentController.GetWatchesHotShowhome();
+    List<Categary> categaries = CommentController.GetCategaries();
+    List<ShowObject> watchFlash = CommentController.GetWatchesFlash();
+    List<ShowObject> watches = CommentController.GetAllWatches();
+    Menu menusWatch = CommentController.MenuWatch();
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+
+}
+
+<link href="~/wwwroots/bootstrap/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+    .slash-3 {
+        background-color: chartreuse;
+        height: 10px;
+        background-image: linear-gradient(45deg, hsla(0, 0%, 5%, 0), hsla(0, 0%, 5%, 0) 33.33%, hsla(0, 0%, 5%, 1) 33.33%, hsla(0, 0%, 5%, 1) 66.67%, hsla(0, 0%, 5%, 0) 66.67%, hsla(0, 0%, 5%, 0) 100%);
+        background-size: 10px 100%;
+        width: 250px;
+    }
+</style>
+<br />
+<br />
+<section class="new">
+    <div class="container">
+        <div class="heading-new">
+            <h3 class="heading-title">
+                Sản phẩm mới nhất
+            </h3>
+            <h4 class="heading-sub">
+                Hãy nhìn qua những sản phẩm mới nhất của chúng tôi <hr />
+            </h4>
+
+        </div>
+        <div class="lastest-new-slide owl-carousel owl-theme ">
+            @foreach (var item in watchesHot)
+            {
+                <div class="new-item">
+                    <div class="thumd">
+                        <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                            <img src="@item.Image" alt="">
+                        </a>
+                    </div>
+                    <div class="desc">
+                        <div class="new-title">
+                            <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                @item.Name - @item.TypeWatch
+                            </a>
+                        </div>
+                        <div class="new-meta">
+                            <ul style="align-content:center;">
+                                @if (item.Percent > 0)
+                                {
+                                    <li class="date">
+                                        <b>Giá bán: </b><b> @String.Format(format, "{0:c0}", item.PriceDiscount)</b>
+                                    </li>
+                                    <li class="author">
+                                        <strike>@item.Price</strike>đ
+                                    </li>
+                                    <li class="comment">
+                                        <b>Còn: </b> @item.Quality <b>Chiếc</b>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="author">
+                                        <b> @String.Format(format, "{0:c0}", item.Price)</b>
+                                    </li>
+                                    <li class="comment">
+                                        Còn @item.Quality<b>Chiếc</b>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="new-excerpt">
+
+                            @Html.Raw(item.Description)
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+    <section class="logo-slide">
+        <h2 style="text-align: center; ">Các thương hiệu hiện có</h2><hr />
+        <br />
+        <div class="container">
+            <div class="logo-list owl-carousel owl-theme ">
+                @foreach (var item in categaries)
+                {
+                    <div class="list-item">
+                        <a href="/@item.Alias">
+                            <img src="@item.Image" alt="">
+                        </a>
+                    </div>
+                }
+
+
+
+            </div>
+        </div>
+
+    </section>
+    <div class="container">
+        <div class="heading-new">
+            <h3 class="heading-title">
+                FLASH SALE
+            </h3>
+            <h4 class="heading-sub">
+                Những mẫu đồng hồ đang hot năm 2022 với giá tốt.<br /> Chương trình diễn ra hàng ngày với các sản phẩm khác nhau.<br /> Nhanh tay sở hữu ngay!!! <hr />
+            </h4>
+
+        </div>
+        <div class="lastest-new-slide owl-carousel owl-theme ">
+            @foreach (var item in watchFlash)
+            {
+                <div class="new-item">
+                    <div class="thumd">
+                        <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                            <img src="@item.Image" alt="">
+                        </a>
+                    </div>
+                    <div class="desc">
+                        <div class="new-title">
+                            <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                @item.Name - @item.TypeWatch
+                            </a>
+                        </div>
+                        <div class="new-meta">
+                            <ul style="align-content:center;">
+
+                                <li class="date">
+                                    <b>Giá bán: </b><b style="color:red;"> @String.Format(format, "{0:c0}", item.PriceDiscount)</b>
+                                </li>
+                                <li class="author">
+                                    <strike>@item.Price</strike>đ
+                                </li>
+                                <li class="comment">
+                                    <b>Còn: </b> @item.Quality <b>Chiếc</b>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="new-excerpt">
+
+                            @Html.Raw(item.Description)
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+    <div class="container">
+        @foreach (var item1 in categaries)
+        {
+
+            <h3>
+                @item1.Titel
+                <hr class="slash-3" />
+            </h3>
+
+            <div class="lastest-new-slide owl-carousel owl-theme ">
+                @for (int i = 0; i < watches.Count; i++)
+                {
+                    if (watches[i].CategaryID == item1.ID)
+                    {
+                        <div class="new-item">
+                            <div class="thumd">
+                                <a href="/@watches[i].MenuAlias/@watches[i].ID/@watches[i].Alias">
+                                    <img src="@watches[i].Image" alt="">
+                                </a>
+                            </div>
+                            <div class="desc">
+                                <div class="new-title">
+                                    <a href="/@watches[i].MenuAlias/@watches[i].ID/@watches[i].Alias">
+                                        @watches[i].Name - @watches[i].TypeWatch
+                                    </a>
+                                </div>
+                                <div class="new-meta">
+                                    <ul style="align-content:center;">
+                                        @if (watches[i].Percent > 0)
+                                        {
+                                            <li class="date">
+                                                <b>Giá bán: </b><b> @String.Format(format, "{0:c0}", watches[i].PriceDiscount)</b>
+                                            </li>
+                                            <li class="author">
+                                                <strike>@watches[i].Price</strike>đ
+                                            </li>
+                                            <li class="comment">
+                                                <b>Còn: </b> @watches[i].Quality <b>Chiếc</b>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li class="author">
+                                                <b> @String.Format(format, "{0:c0}", watches[i].Price)</b>
+                                            </li>
+                                            <li class="comment">
+                                                Còn @watches[i].Quality<b>Chiếc</b>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+            <br />
+        }
+    </div>
+</section>
+
+
+
+

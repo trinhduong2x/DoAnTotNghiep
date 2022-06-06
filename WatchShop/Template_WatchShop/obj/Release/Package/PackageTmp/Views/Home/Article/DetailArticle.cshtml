@@ -1,0 +1,87 @@
+﻿@using ProjectLibrary.Database
+@using Template_WatchShop.Controllers
+@model Template_WatchShop.Models.DetailArticle
+@{
+    ViewBag.Title = "DetailArticle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="main">
+
+    <section class="information-news">
+        <div class="container">
+            <div class="row row-infor">
+                <div class="col-lg-8 content-sidebar">
+                    <div class="sidebar-main">
+                        <div class="feature">
+                            <img src="@Model.Article.Image" alt="">
+                        </div>
+                        <div class="entry-holder">
+                            <div class="new-meta">
+                                <ul>
+                                    <li class="date">
+                                        <i class="fas fa-calendar"></i> @Model.Article.CreateDate
+                                    </li>
+                                    <li class="author">
+                                        <i class="fas fa-user"></i> @Model.Article.Author
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                            <div class="entry-content">
+                                <div class="entry-content__main">
+                                    @Html.Raw(Model.Article.Content)
+                            </div>
+                           
+                        </div>
+                    
+                    </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 aside-sidebar">
+                    
+               
+                    <div class="aside-item wrap-recent-posts">
+                        <div class="aside-cont">
+                            <h2 class="aside-title">
+                                Những bài viết khác
+                            </h2>
+
+                            <div class="wrap-aside-main">
+                                <div class="posts-list">
+                                    @foreach (var item in Model.Articles)
+                                    {
+                                        <div class="entry-brief">
+                                            <div class="entry-media">
+                                                <a href="/tin-tuc/@item.ID/@item.Alias">
+                                                    <img src="@item.Image" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="entry-content">
+                                                <h4 class="entry-title">
+                                                    @item.Title
+                                               </h4>
+                                                <div class="entry-date">
+                                                    <span>@item.CreateDate</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                    
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                 
+                   
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+</main>

@@ -1,0 +1,181 @@
+﻿@using ProjectLibrary.Database
+@using Template_WatchShop.Controllers
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Watchshop watchshop = CommentController.DetailShop();
+    Menu menu = ViewBag.Menu ?? new Menu();
+
+}
+
+
+<main class="main">
+
+
+    <section class="attack">
+        <div class="container">
+            <div class="row attack-row">
+                <div class="col-sm-4">
+                    <div class="attack-row__wrap">
+                        <span class="icon">
+                            <i class="far fa-map-marked-alt"></i>
+                        </span>
+                        <h3 class="title">
+                            Hotel Address
+                        </h3>
+                        <div class="content">
+                            @watchshop.Address
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="attack-row__wrap">
+                        <span class="icon">
+                            <i class="far fa-envelope-open-text"></i>
+                        </span>
+                        <h3 class="title">
+                            Call Us Support 24/7
+                        </h3>
+                        <div class="content">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="attack-row__wrap">
+                        <span class="icon">
+                            <i class="far fa-envelope-open-text"></i>
+                        </span>
+                        <h3 class="title">
+                            Our Email Hotel
+                        </h3>
+                        <div class="content">
+                            @watchshop.Email
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+    <section class="contact-form">
+        <div class="container">
+            <div class="box-meta-form">
+                <h3 class="title-form">
+                    Drop A Line
+                </h3>
+                <div class="description">
+                    YOU CAN CONTACT US TO ASK QUESTIONS, ANSWER QUESTIONS BOOKING
+                </div>
+            </div>
+            <div class="box-form">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <form action="/Contact/SubmitContact" method="post" id="contact-form">
+                        <div class="contact_form">
+                            
+                            <div style="display:flex">
+                                <div class="col-md-4">
+                                    <input type="text" name="FullName" class="form-control" placeholder="Họ tên">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" name="Tel" class="form-control" placeholder="Điện thoại">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <input type="text" name="Email" class="form-control" placeholder="Email ">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="col-md-12">
+                                <textarea class="form-control" name="Request" id="mess_contact" rows="10" placeholder="Yêu cầu"></textarea>
+                            </div>
+                            <br />
+                            <div class="submit_message">
+                                <button class="submit_form">
+                                   Gửi liên hệ
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+    
+    <section class="inner-column">
+        <div class="row row-inner-column">
+            <div class="col-md-6 desc">
+                <h3 class="heading-tag">
+                    We Are Senotina Hotel Team
+                </h3>
+                <h4 class="heading-sub">
+                    “ We are honored to welcome and serve you. come to our hotel and enjoy ”
+                </h4>
+                <div class="heading-desc">
+                    Lorem Ipsum is simply text the printing and typesetting standard industry. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.
+                </div>
+                <a href="" class="btn-view-room">view all room</a>
+            </div>
+            <div class="col-md-6 thumd">
+                <img src="./images/img-contact-right.jpg" alt="">
+            </div>
+        </div>
+    </section>
+
+</main>
+
+@section script{
+    <script src="~/Plugins/Validate/jquery-validation-1.13.1/jquery.validate.min.js"></script>
+    <script src="~/Plugins/Validate/jquery-validation-1.13.1/additional-methods.min.js"></script>
+
+    <script type="text/javascript">
+
+        //jQuery(document).ready(function () {
+        //    jQuery("#contactform").validate();
+        //});
+        $("#wraploadding").hide();
+
+        function LoadingSendEmail() {
+            $("#wraploadding").show();
+            $("#wraploadding").css("width", $(window).width());
+            $("#wraploadding").css("height", $(window).height());
+            $("#imgloadding ").css("top", ($(window).height() / 2) - 80);
+        }
+        //validate
+        jQuery.validator.setDefaults({
+            debug: true,
+            success: "valid"
+        });
+        $("#contact-form").validate({
+            rules: {
+                'Request': {
+                    required: true,
+                },
+                'FullName': {
+                    required: true,
+                },
+                'Email': {
+                    required: true,
+                    email: true
+                },
+                'Tel': {
+                    required: true,
+                }
+            },
+            messages: {
+                'FullName': "Please enter Full Name",
+                'Request': "Please enter Request",
+                'Email': "Please enter Email Adress",
+                'Tel': "Please enter Phone Number",
+            },
+            submitHandler: function (form) {
+                form.submit();
+                LoadingSendEmail();
+            }
+        });
+
+    </script>
+
+}

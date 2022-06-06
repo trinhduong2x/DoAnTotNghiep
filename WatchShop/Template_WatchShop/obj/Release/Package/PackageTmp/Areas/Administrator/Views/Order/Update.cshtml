@@ -1,0 +1,31 @@
+﻿@model  ProjectLibrary.Database.Order
+@{
+    Layout = "~/Areas/Administrator/Views/Templates/_LayoutPage.cshtml";
+
+}
+<br />
+<div class="widget-content">
+    @Html.ValidationSummary(true)
+    @using (Html.BeginForm("Update", "Order", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.HiddenFor(a => a.ID)
+     
+        <h4>Nếu đơn hàng bị trả về thì chọn bị trả hàng</h4>
+        <br />
+        <div class="control-group">
+            <label class="control-label" for="Title">Đơn hàng</label>
+            <div class="controls">
+                <label class="radio-inline">@Html.RadioButtonFor(m => m.Completed, "true")  Hoàn Thành </label>
+                <label class="radio-inline">@Html.RadioButtonFor(m => m.Completed, "false") Bị trả hàng</label>
+            </div>
+        </div>
+
+    
+        <div class="form-actions">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+            <a href="@Url.Action("Index", "Order")" class="btn">Cancel</a>
+        </div>
+
+       
+    }
+</div>

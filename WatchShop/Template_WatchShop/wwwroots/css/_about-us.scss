@@ -1,0 +1,284 @@
+section.banner {
+    .banner-webcont {
+        position: relative;
+        overflow: hidden;
+        height: 600px;
+        &::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-origin: 0% 0%;
+            background-color: rgb(5, 0, 0);
+            opacity: 0.6;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .bg-slide {
+            height: 100%;
+        }
+        .bg-slide__cont {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 40%;
+            left: 0;
+            right: 0;
+            &_main {
+                text-align: center;
+                h1 {
+                    font-size: 70px;
+                    line-height: 85px;
+                    text-transform: capitalize;
+                    color: #fff;
+                    font-weight: bold;
+                    margin-bottom: 32px;
+                    word-wrap: break-word;
+                    @media(max-width: 991px) {
+                        font-size: 40px;
+                        margin-bottom: 30px;
+                        line-height: 1.1;
+                    }
+                    @media(max-width:768px) {
+                        font-size: 30px;
+                        line-height: 1.1;
+                        margin-bottom: 15px;
+                    }
+                }
+                p {
+                    margin-top: 43px;
+                    font-family: 'Renner Book';
+                    font-size: 20px;
+                    font-weight: 500;
+                    letter-spacing: 0.07em;
+                    text-transform: uppercase;
+                    color: #fff;
+                    @media(max-width: 768px) {
+                        font-size: 16px;
+                        margin-top: 20px;
+                        text-transform: unset;
+                    }
+                }
+                .btn-slide {
+                    .btn-slide__active {
+                        margin-right: 30px;
+                        font-family: "Playfair Display";
+                        display: inline-block;
+                        padding: 12px 30px;
+                        color: white;
+                        text-transform: uppercase;
+                        font-size: 14px;
+                        line-height: 21px;
+                        font-weight: bold;
+                        border: 2px solid white;
+                        transition: all 0.3s linear;
+                        &:hover {
+                            background-color: white;
+                            color: #222;
+                            transition: all 0.3s linear;
+                        }
+                    }
+                }
+            }
+        }
+        @media(max-width:991px) {
+            height: 50vh;
+            .bg-slide {
+                height: 100%;
+                .bg-slide__cont {
+                    top: 50%;
+                    left: 50%;
+                    right: auto;
+                    height: auto;
+                    transform: translate(-50%, -50%);
+                }
+            }
+        }
+    }
+}
+
+section.assess {
+    margin-bottom: 100px;
+    .assess-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 65px;
+        .layout-title {
+            font-weight: bold;
+            font-size: 45px;
+            color: #222;
+            margin-bottom: 0;
+            letter-spacing: 0.03em;
+        }
+        a {
+            font-size: 13px;
+            color: #222;
+            letter-spacing: 1px;
+            display: inline-block;
+            font-family: 'Renner Medium';
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-bottom: 1px solid #222;
+            &:hover {
+                color: #c5a47e;
+                border-bottom-color: #c5a47e;
+            }
+        }
+        @media(max-width:540px) {
+            flex-direction: column;
+            .layout-title {
+                font-size: 38px;
+            }
+        }
+    }
+    .assess-slide {
+        #sync1 {
+            .item {
+                padding: 42px 48px 40px;
+                .emotion {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 25px;
+                    &-title {
+                        display: inline-block;
+                        font-size: 20px;
+                        letter-spacing: 0.03em;
+                        margin-right: 15px;
+                        margin-bottom: 0;
+                    }
+                    &-rating {
+                        display: inline-block;
+                        position: relative;
+                        i {
+                            color: #c5a47e;
+                        }
+                    }
+                }
+                .content {
+                    font-size: 17px;
+                    line-height: 28px;
+                    font-family: 'Renner Book';
+                    color: #222;
+                }
+                @media(max-width:540px) {
+                    padding: 16px;
+                }
+            }
+            .owl-nav button {
+                width: 35px;
+                height: 35px;
+                box-shadow: 0px 8px 17px 2px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12), 0px 5px 5px -3px rgba(0, 0, 0, 0.2);
+            }
+        }
+        #sync2 {
+            margin-top: 35px;
+            .item {
+                &-cont {
+                    display: flex;
+                    align-items: center;
+                    .image {
+                        width: 70px;
+                        height: 70px;
+                        overflow: hidden;
+                        border-radius: 50%;
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            transition: all 0.5s linear;
+                            &:hover {
+                                transform: scale(1.25);
+                                transition: all 0.5s linear;
+                            }
+                        }
+                    }
+                    .meta {
+                        margin-left: 20px;
+                        .title {
+                            font-size: 17px;
+                            font-family: 'Renner Book';
+                            color: #222;
+                            margin-bottom: 2px;
+                            letter-spacing: 0.1em;
+                        }
+                        span {
+                            font-family: 'Renner Light';
+                            font-size: 15px;
+                            line-height: 1.2;
+                        }
+                    }
+                }
+            }
+            .owl-item {
+                opacity: 0.7;
+                &:hover {
+                    opacity: 1;
+                }
+            }
+            .owl-item.current {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+section.inner {
+    .inner-item {
+        display: flex;
+        align-items: center;
+        height: 530px;
+        .item-col {
+            width: 50%;
+            height: 100%;
+        }
+        .col-left {
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .col-right {
+            padding: 0 100px;
+            background-color: #222222;
+            display: flex;
+            align-items: center;
+            color: white;
+            .heading-tag {
+                color: white;
+                margin-bottom: 30px;
+            }
+            .heading-desc {
+                font-size: 17px;
+            }
+        }
+        &:nth-child(2) {
+            .col-left {
+                order: 2;
+            }
+        }
+        @media(max-width:991px) {
+            height: 320px;
+            .col-right {
+                padding: 0 26px;
+            }
+        }
+        @media(max-width:768px) {
+            flex-direction: column;
+            height: auto;
+            .item-col {
+                width: 100%;
+                height: 320px;
+            }
+            &:nth-child(2) {
+                .col-left {
+                    order: inherit;
+                }
+            }
+        }
+    }
+}

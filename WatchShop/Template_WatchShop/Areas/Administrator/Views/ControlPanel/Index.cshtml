@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Templates/_LayoutPage.cshtml";
+}
+
+@{
+    Layout = "~/Areas/Administrator/Views/Templates/_LayoutPage.cshtml";
+}
+<div>
+    <div class="widget">
+        <div class="widget-header">
+            <i class="icon-bookmark"></i>
+            <h3>Thống kê</h3>
+        </div>
+        <!-- /widget-header -->
+        <div class="widget-content">
+            <div class="shortcuts">
+                <a href="/admin/Order/OrderList" class="shortcut">
+                    <i class="shortcut-icon icon-certificate"></i>
+                    <span class="shortcut-label">Thống kê đơn hàng đang giao</span>
+                </a>
+                <a href="/admin/Order/OrderListShipping" class="shortcut">
+                    <i class="shortcut-icon icon-save"></i>
+                    <span class="shortcut-label">Thống kê đơn hàng đã hoàn thành</span>
+                </a>
+                <a href="/admin/Order/OrderListfalse" class="shortcut">
+                    <i class="shortcut-icon icon-ambulance"></i>
+                    <span class="shortcut-label">Thống kê đơn hàng bị hủy</span>
+                </a>
+                <a href="/admin/Order/OrderListRecived" class="shortcut">
+                    <i class="shortcut-icon icon-adn"></i>
+                    <span class="shortcut-label">Thống kê đơn hàng đã nhận đơn</span>
+                </a>
+                
+                <a href="/admin/Order/ListProduct" class="shortcut">
+                    <i class="shortcut-icon icon-asterisk"></i>
+                    <span class="shortcut-label">Thống kê sản phẩm đã bán</span>
+                </a>
+                <a href="/admin/Watch/WatchOver" class="shortcut">
+                    <i class="shortcut-icon icon-android"></i>
+                    <span class="shortcut-label">Thống kê hàng tồn</span>
+                </a>
+
+            </div>
+            <!-- /shortcuts -->
+        </div>
+        <!-- /widget-content -->
+    </div>
+
+</div>
+

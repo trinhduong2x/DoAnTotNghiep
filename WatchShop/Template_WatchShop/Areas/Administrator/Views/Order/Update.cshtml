@@ -1,0 +1,31 @@
+﻿@model  ProjectLibrary.Database.Order
+@{
+    Layout = "~/Areas/Administrator/Views/Templates/_LayoutPage.cshtml";
+
+}
+<br />
+<div class="widget-content">
+    @Html.ValidationSummary(true)
+    @using (Html.BeginForm("Update", "Order", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.HiddenFor(a => a.ID)
+
+        <h4>Lưu ý nếu nhập sai thì phải liên hệ IT để đổi - HÃY THẬT THẬN TRỌNG VÀ NHÌN THẬT KĨ</h4>
+        <br />
+        
+        <div class="control-group">
+            <label class="control-label" for="Type">Kiểu đơn hàng<span class="asterisk">*</span></label>
+            <div class="controls">
+                @Html.DropDownListFor(c => c.Completed, new SelectList(ViewBag.ListTypeOrder, "Value", "Text"), new { @class = "span3" })
+                @Html.ValidationMessageFor(c => c.Completed)
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+            <a href="@Url.Action("Index", "Order")" class="btn">Cancel</a>
+        </div>
+
+
+    }
+</div>

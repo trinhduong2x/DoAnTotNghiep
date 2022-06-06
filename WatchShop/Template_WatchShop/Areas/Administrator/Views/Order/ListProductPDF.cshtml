@@ -1,0 +1,143 @@
+﻿@using Template_WatchShop.Areas.Administrator.Models
+@{
+    Layout = null;
+    var products = Session["products"] as List<Product_Order>;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ListProduct</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="~/Areas/Administrator/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Areas/Administrator/Content/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
+          rel="stylesheet">
+    <link href="~/Areas/Administrator/Content/css/font-awesome.css" rel="stylesheet">
+    <link href="~/Areas/Administrator/Content/css/style.css" rel="stylesheet">
+    <link href="~/Areas/Administrator/Content/css/pages/dashboard.css" rel="stylesheet">
+    <link href="~/Scripts/jtable/themes/lightcolor/blue/jtable.css" rel="stylesheet" />
+    <link href="~/Areas/Administrator/Content/css/jquery-ui.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Areas/Administrator/Content/media/system/css/validationEngine.jquery.css" type="text/css" />
+    <link href="~/Areas/Administrator/Content/media/system/css/ui.notify.css" rel="stylesheet" />
+
+
+
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.9.2.min.js"></script>
+    <script src="~/Areas/Administrator/Content/media/system/js/jquery.notify.js"></script>
+    <script src="~/Areas/Administrator/Content/media/system/js/JavaScript.js"></script>
+
+
+    <script src="~/Scripts/jtable/jquery.jtable.js"></script>
+    <script src="~/ckfinder/ckfinder.js"></script>
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script src="~/Scripts/JavaScript1.js"></script>
+</head>
+
+
+
+<body>
+    <div class="optionShow" style="display:flex; align-content:center">
+        <h4>Thống kê các sản phẩm đã bán</h4>
+        <div class="item-option" style="display:flex">
+            <div class="title-item-option">Từ ngày: @Session["Checkin"]</div>
+            @*<div class="content-item-option"><label type="text" name="checkin" id="checkin" value="@Session["Checkin"]" /></div>*@
+        </div>
+        <div class="item-option" style="display:flex">
+            <div class="title-item-option">Đến ngày: @Session["Checkout"]</div>
+            @*<div class="content-item-option"><label type="text" name="checkout" id="checkout" value="@Session["Checkout"]" /></div>*@
+        </div>
+
+
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>  </th>
+                <th><h3>Sản phẩm bán chạy</h3></th>
+                <th><h4>@Session["name"]</h4></th>
+                <th><h3>Số lượng</h3></th>
+                <th><h4>@Session["quanlity"]</h4></th>
+
+            </tr>
+            <tr>
+                <th>Tên đồng hồ</th>
+                <th>Số lượng bán</th>
+                <th>Giá tiền</th>
+                <th>Đơn giá</th>
+                <th>Ngày bán</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (products != null)
+            {
+            foreach (var item in products)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>
+                        @item.Quality
+                    </td>
+                    <td>@item.Price</td>
+                    <td>@item.Total</td>
+                    <td>@item.CreateDate</td>
+                </tr>
+            }
+            }
+
+        </tbody>
+    </table>
+
+
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#checkin").datepicker();
+        $("#checkout").datepicker();
+        $("#book-date").datepicker();
+    });
+    $(function () {
+        $(".PDF").click(function () {
+
+            $.ajax({
+                type: "POST",
+                url: '/Order/ExportPDF5',
+                dataType: "json",
+                success: function (res) {
+                    if (res.status == true) {
+                        window.location.href = "/ListProduct";
+                        alert("Hãy bắt đầu mua sắm!");
+                    }
+                }
+            });
+            return false;
+        })
+    });
+
+    $(function () {
+        $(".update").click(function () {
+            let id = $("#ID").val();
+            let Quality = $("#Quality").val();
+            $.ajax({
+                type: "POST",
+                url: `/Carts/update/${id}/${Quality}`,
+                dataType: "json",
+                data: datas,
+                success: function (data) {
+                    if (data.status == true) {
+                        window.location.href = "/Carts";
+                        alert("Cập nhật thành công!");
+                    }
+                }
+            });
+            return false;
+        })
+    });
+</script>

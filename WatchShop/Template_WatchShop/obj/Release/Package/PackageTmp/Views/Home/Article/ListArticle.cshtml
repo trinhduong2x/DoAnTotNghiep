@@ -1,0 +1,186 @@
+﻿@using ProjectLibrary.Database
+@using Template_WatchShop.Controllers
+
+@{
+    ViewBag.Title = "ListArticle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Article> articleshot = CommentController.ArticlesHot();
+    List<Article> articlesnew = CommentController.ArticlesNew();
+    List<Article> articles = CommentController.Articles();
+}
+<br />
+<br />
+<nav>
+    <div class="nav nav-tabs md-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+           aria-controls="nav-home" aria-selected="true">Tin mới nhất</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+           aria-controls="nav-profile" aria-selected="false">Tin nóng nhất</a>
+        <a class="nav-item nav-link" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab"
+           aria-controls="nav-profile" aria-selected="false">Tất cả bài viết</a>
+    </div>
+</nav>
+<div class="tab-content pt-5" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="gallery-grid">
+            <section class="new-list" style="padding:0px">
+                <div class="container">
+                    <div class="list-grid-item">
+                        <div class="row list-view">
+                            @foreach (var item in articleshot)
+                            {
+                                <div class="col-md-4">
+                                    <div class="new-item">
+                                        <div class="thumd">
+                                            <a href="/tin-tuc/@item.ID/@item.Alias">
+                                                <img src="@item.Image" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="desc">
+                                            <div class="new-title">
+                                                <a href="/tin-tuc/@item.ID/@item.Alias">
+                                                    @item.Title
+                                                </a>
+                                            </div>
+                                            <div class="new-meta">
+                                                <ul>
+                                                    <li class="date">
+                                                        <i class="fas fa-calendar"></i> @item.CreateDate
+                                                    </li>
+                                                    <li class="author">
+                                                        <i class="fas fa-user"></i> @item.Author
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="new-excerpt">
+
+                                                @Html.Raw(item.Description)
+                                            </div>
+                                            <div class="new-readmore">
+                                                <a href="/tin-tuc/@item.ID/@item.Alias">
+                                                    read more
+                                                    <i class="far fa-long-arrow-alt-right"></i>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </section>
+        </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <div class="gallery-grid">
+            <section class="new-list" style="padding:0px">
+                <div class="container">
+                    <div class="list-grid-item">
+                        <div class="row list-view">
+                            @foreach (var item in articlesnew)
+                            {
+                                <div class="col-md-4">
+                                    <div class="new-item">
+                                        <div class="thumd">
+                                            <a href="">
+                                                <img src="@item.Image" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="desc">
+                                            <div class="new-title">
+                                                <a href="">
+                                                    @item.Title
+                                                </a>
+                                            </div>
+                                            <div class="new-meta">
+                                                <ul>
+                                                    <li class="date">
+                                                        <i class="fas fa-calendar"></i> @item.CreateDate
+                                                    </li>
+                                                    <li class="author">
+                                                        <i class="fas fa-user"></i> @item.Author
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="new-excerpt">
+
+                                                @Html.Raw(item.Description)
+                                            </div>
+                                            <div class="new-readmore">
+                                                <a href="/tin-tuc/@item.ID/@item.Alias">
+                                                    read more
+                                                    <i class="far fa-long-arrow-alt-right"></i>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </section>
+    </div>
+    <div class="tab-pane fade" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+        <div class="gallery-grid">
+            <section class="new-list" style="padding:0px">
+                <div class="container">
+                    <div class="list-grid-item">
+                        <div class="row list-view">
+                            @foreach (var item in articles)
+                            {
+                                <div class="col-md-4">
+                                    <div class="new-item">
+                                        <div class="thumd">
+                                            <a href="">
+                                                <img src="@item.Image" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="desc">
+                                            <div class="new-title">
+                                                <a href="">
+                                                    @item.Title
+                                                </a>
+                                            </div>
+                                            <div class="new-meta">
+                                                <ul>
+                                                    <li class="date">
+                                                        <i class="fas fa-calendar"></i> @item.CreateDate
+                                                    </li>
+                                                    <li class="author">
+                                                        <i class="fas fa-user"></i> @item.Author
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="new-excerpt">
+
+                                                @Html.Raw(item.Description)
+                                            </div>
+                                            <div class="new-readmore">
+                                                <a href="/tin-tuc/@item.ID/@item.Alias">
+                                                    read more
+                                                    <i class="far fa-long-arrow-alt-right"></i>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </section>
+    </div>
+
+        </div>
+
+<br />

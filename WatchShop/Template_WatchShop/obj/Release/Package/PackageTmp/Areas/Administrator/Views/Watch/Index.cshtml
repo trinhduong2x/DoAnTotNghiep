@@ -1,0 +1,117 @@
+﻿@model Template_WatchShop.Areas.Administrator.ModelShow.ShowWatch
+@{
+    Layout = "~/Areas/Administrator/Views/Templates/_LayoutPage.cshtml";
+}
+<form action="@Url.Action("UpdateIndex", "Watch")" method="POST" id="updateIndex">
+
+    <div id="jtable-main-container"></div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#jtable-main-container').jtable({
+                title: '@ViewBag.Title',
+                paging: true, //Enable paging
+                pageSize: 20, //Set page size (default: 10)
+                sorting: true, //Enable sorting
+                defaultSorting: 'Name ASC', //Set default sorting
+                selecting: true, //Enable selecting
+                multiselect: true, //Allow multiple selecting
+                selectingCheckboxes: true, //Show checkboxes on first column
+                columnResizable: true, //Actually, no need to set true since it's default
+                columnSelectable: true, //Actually, no need to set true since it's default
+                saveUserPreferences: true, //Actually, no need to set true since it's default
+                toolbar: {
+                    items: [
+                        {
+                            icon: '/Areas/Administrator/Content/img/add.png',
+                            text: 'Thêm mới',
+                            click: function() {
+                                window.location = '@Url.Action("Create", "Watch")';
+                            }
+                        }, {
+                            icon: '/Areas/Administrator/Content/img/Ordering.png',
+                            text: 'Sắp xếp',
+                            click: function() {
+                                $("#updateIndex").submit();
+                            }
+                        }
+                    ]
+                },
+                actions: {
+                    listAction: '@Url.Action("List", "Watch")',
+                    deleteAction: '@Url.Action("Delete", "Watch")',
+                },
+                fields: {
+                    ID: {
+                        key: true,
+                        create: false,
+                        edit: false,
+                        list: false
+                    },
+                    Name: {
+                        title: 'Tên đồng hồ',
+                        width: '12%',
+                        display: function (data) {
+                            return '<a href="/admin/Watch/Update/' + data.record.ID + '">' + data.record.Name + '</a>';
+                        }
+                    },
+                    Index: {
+                        title: 'Thứ tự hiển thị',
+                        width: '8%',
+                        sorting: false,
+                        display: function(data) {
+                            return '<input type="text" name="sort[' + data.record.ID + '].Index" style="width:25px" value="' + data.record.Index + '"/>';
+                        }
+                    },
+                    Quality: {
+                        title: 'Số lượng còn',
+                        width: '8%',
+                    },
+                    Price: {
+                        title: 'Giá bán',
+                        width: '4%',
+                    },
+                    Percent: {
+                        title: 'Khuyến mại',
+                        width: '4%',
+                    },
+                    Hot: {
+                        title: 'Hot',
+                        width: '4%',
+                        type: 'checkbox',
+                        values: { 'false': 'Không', 'true': 'Có' },
+                        defaultValue: 'true'
+                    },
+                    New: {
+                        title: 'New',
+                        width: '4%',
+                        type: 'checkbox',
+                        values: { 'false': 'Không', 'true': 'Có' },
+                        defaultValue: 'true'
+                    },
+                    Status: {
+                        title: 'Trạng thái hiển thị',
+                        width: '8%',
+                        type: 'checkbox',
+                        values: { 'false': 'Không', 'true': 'Có' },
+                        defaultValue: 'true'
+                    },
+                    '':
+                    {
+                        title: '',
+                        width: '2%',
+                        sorting: false,
+                        display: function(data) {
+                            return '<button title="Edit" type="button" class="jtable-command-button jtable-edit-command-button" onclick="editRecord(' + data.record.ID + ')"><span>Edit</span></button>';
+                        }
+                    }
+                }
+            });
+            $('#jtable-main-container').jtable('load');
+        });
+    </script>
+</form>
+<script>
+    function editRecord(Id) {
+        window.location = '@Url.Action("Update", "Watch")' + '/' + Id;
+    }
+</script>

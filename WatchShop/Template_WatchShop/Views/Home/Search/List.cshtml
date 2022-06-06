@@ -1,0 +1,66 @@
+﻿@using ProjectLibrary.Database
+@using Template_WatchShop.Controllers
+@model IEnumerable<Template_WatchShop.Models.ShowObject>
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+
+}
+
+<section class="list-room">
+
+    <div class="container">
+
+        <div class="room-main">
+          
+            <div class="row">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 room-item">
+                        <div class="thumd">
+                            <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                <img style="width:410px;height:300px;" src="@item.Image" alt="">
+                            </a>
+                            @if (item.Percent > 0)
+                            {
+                                <h3 class="room-title">
+                                    <span>Sale:</span>
+                                    <span class="price1">@item.Percent%</span>
+                                </h3>
+                            }
+                        </div>
+                        <div class="desc">
+                            <h3 class="entry-name">
+                                @item.Name - @item.TypeWatch
+                            </h3>
+                            <div class="excrept">
+                                @if (item.Percent > 0)
+                                {
+                                    <p>
+                                        <b>@String.Format(format, "{0:c0}", item.PriceDiscount)</b> - <strike>@item.Price</strike>Đ
+                                        <br />
+                                        <b>Còn: @item.Quality Chiếc</b>
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p>
+                                        <b>@String.Format(format, "{0:c0}", item.Price)</b>
+                                        <br />
+                                        <b>Còn: @item.Quality Chiếc</b>
+                                    </p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+
+               
+            </div>
+        </div>
+    </div>
+</section>
+

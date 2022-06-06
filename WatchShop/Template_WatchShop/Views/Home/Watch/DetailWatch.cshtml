@@ -1,0 +1,274 @@
+﻿@using ProjectLibrary.Database
+@using Template_WatchShop.Controllers
+@model Template_WatchShop.Models.DetailWatch
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int GalleryCount = Model.watchGalleries.Count;
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+
+}
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-5">
+
+            <div class="carousel slide" data-ride="carousel" id="carousel-1">
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active"><img class="img-thumbnail w-100 d-block" style="height:473.75px" src="@Model.watch.Image" alt="Slide Image" loading="lazy"></div>
+                    @foreach (var item in Model.watchGalleries)
+                    {
+                        <div class="carousel-item"><img class="img-thumbnail w-100 d-block" src="@item.ImageLarge" alt="Slide Image"></div>
+
+                    }
+                </div>
+                <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-1" data-slide-to="0" class="active"></li>
+                    @for (int i = 1; i < GalleryCount; i++)
+                    {
+                        <li data-target="#carousel-1" data-slide-to="@i"></li>
+
+                    }
+
+                </ol>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <h4>@Model.watch.Name - @Model.watch.TypeWatch.Titel</h4>
+            @if (Model.watch.Percent > 0)
+            {
+                <div class="price"><span class="mr-2"><i class="fa fa-rupee text-success"></i>&nbsp; @String.Format(format, "{0:c0}", Model.watch.PriceDiscount)</span><span class="mr-2 cut">@Model.watch.Price</span><span class="text-success">@Model.watch.Percent% OFF</span></div>
+
+            }
+            else
+            {
+                <div class="price"><span class="mr-2"><i class="fa fa-rupee text-success"></i>&nbsp; @String.Format(format, "{0:c0}", Model.watch.Price)</span></div>
+
+            }
+        <h4 class="descript" style="display:flex;margin:12px 0 25px 0;font-size:inherit;font-weight:inherit; padding:5px;">
+            <div class="item" style="padding: 5px; border-right: 1px solid #dddddd">
+                <b class="text" style="line-height:19px;">Đường kính mặt</b><br />
+                <span class="num">@Model.watch.FaceDiameter mm</span>
+            </div>
+            <div class="item" style="padding: 5px; border-right: 1px solid #dddddd">
+                <b class="text">Độ chịu nước</b><br />
+                                                <span class="num">@Model.watch.WaterProof ATM</span>
+            </div>
+            <div class="item" style="padding: 5px; border-right: 1px solid #dddddd">
+                <b class="text">Chất liệu mặt</b><br />
+                                                 <span class="num">@Model.watch.FaceMaterial </span>
+            </div>
+            <div class="item" style="padding: 5px; border-right: 1px solid #dddddd">
+                <b class="text">Năng lượng sử dụng</b><br />
+                                                      <span class="num"> @Model.watch.EnergyUse</span>
+            </div>
+        </h4>
+            <div class="d-flex align-items-center mt-5 delivery"><i class="fa fa-map-marker"></i><span class="ml-2">Gọi đặt mua:<br></span><span class="ml-2 mr-2">|<br></span><span class="ml-2 mr-2 text-success">0358127474<br></span></div>
+            <hr>
+            
+            <div class="mt-3">
+                @*<a class="btn btn-dark mr-2" href="@Url.Action("addItem","Carts",new { id = Model.watch.ID,@strURL = Request.Url.AbsoluteUri})">Thêm giỏ hàng</a>*@
+                <a class="button cbp-vm-icon cbp-vm-add" href="@Url.Action("addItem","Carts",new { id = Model.watch.ID,@strURL = Request.Url.AbsoluteUri})">Thêm giỏ hàng</a>
+
+            </div>
+    </div>
+</div>
+
+<section class="infor-room">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#description" role="tab" aria-controls="home" aria-selected="true">Miêu tả</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#addittional" role="tab" aria-controls="profile" aria-selected="false">Chính sách bảo hàng</a>
+                    </li>
+                   
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="home-tab">
+                       @Html.Raw(Model.watch.Description)
+                    </div>
+
+                    <div class="tab-pane fade" id="addittional" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="content">
+                            <h4><strong>1. Địa chỉ Trung tâm bảo hành của <a href="https://www.dangquangwatch.vn">DuongWatch</a>:</strong></h4>
+
+                            <ol style="list-style-type:lower-roman">
+                                <li><span style="font-size:14px">Hải Yến - Tĩnh Gia - Thanh Hóa | Tel:&nbsp;</span>0358127474</li>
+                            </ol>
+
+                            <h4><strong>2.&nbsp;Thời gian nhận và trả bảo hành:</strong></h4>
+                            <ol style="list-style-type:lower-roman">
+                                <li><span style="font-size:14px">Tại trung tâm bảo hành: Từ 8h30 đến 17h00 các ngày trong tuần (trừ chủ nhật và các ngày lễ, Tết).</span></li>
+                                <li><span style="font-size:14px">Tại  hệ thống DuongWatch  tất cả các ngày trong tuần kể cả ngày lễ và chủ nhật, từ 8h30 đến 21h</span></li>
+                            </ol>
+                            <h4><strong>3. Chính sách bảo hành:</strong></h4>
+
+                            <ol style="list-style-type:lower-roman">
+                                <li><span style="font-size:14px">Đồng hồ được bảo hành từ 1-10 năm kể từ ngày mua theo quy định của hãng sản xuất (tùy từng hãng sẽ có thời gian bảo hành khác nhau).</span></li>
+                            </ol>
+
+                            <h4><strong>4. Phạm</strong>&nbsp;<strong>vi tiếp nhận đồng hồ bảo hành và sửa chữa:</strong></h4>
+
+                            <ol style="list-style-type:lower-roman">
+                                <li><span style="font-size:14px">DuongWatch tiếp nhận bảo hành và sửa chữa đối với tất cả các sản phẩm được mua tại hệ thống </span>DuongWatch&nbsp;<span style="font-size:14px">.</span></li>
+                                <li><span style="font-size:14px">Những sản phẩm mang thương hiệu mà </span>DuongWatch&nbsp;<span style="font-size:14px"> là nhà phân phối độc quyền tại Việt Nam cũng sẽ tiếp nhận bảo hành và sửa chữa.</span></li>
+                                <li><span style="font-size:14px">Ngoài những trường hợp nêu trên, </span>DuongWatch&nbsp;<span style="font-size:14px"> sẽ tiếp nhận đồng hồ để bảo hành hoặc sửa chữa cho quý khách hàng.</span></li>
+                            </ol>
+
+                            <h4><strong>5. Điều kiện để đồng hồ được bảo hành miễn phí và cách tính phí đối với đồng hồ sửa chữa:</strong></h4>
+
+                            <ol style="list-style-type:lower-roman">
+                                <li><span style="font-size:14px">Nếu đồng hồ mua tại </span>DuongWatch&nbsp;<span style="font-size:14px"> và còn trong thời gian bảo hành, khách hàng phải xuất trình được những giấy tờ liên quan đến sản phẩm như sổ bảo hành hoặc hóa đơn mua hàng…, khách hàng sẽ được bảo hành miễn phí theo như quy định của hãng sản xuất.</span></li>
+                                <li><span style="font-size:14px">Nếu đồng hồ hết thời gian bảo hành hoặc Khách hàng không mang theo giấy tờ cần thiết liên quan đến sản phẩm thì Khách hàng sẽ mất phí sửa chữa.</span></li>
+                            </ol>
+
+                            <h4><strong>6. Phạm vi bảo hành đồng hồ:</strong></h4>
+
+                            <ol style="list-style-type:lower-roman">
+                                <li>DuongWatch&nbsp;<span style="font-size:14px">Watch chỉ bảo hành các lỗi kỹ thuật về máy (như đồng hồ không chạy, chạy không chính xác), độ chịu nước và pin đồng hồ.</span></li>
+                                <li><span style="font-size:14px">Nếu đồng hồ gặp các vấn đề về lỗi kỹ thuật như đồng hồ không chạy hoặc chạy không chính xác, hơi nước trên mặt đồng hồ, dây hoặc vỏ đồng hồ bị bong tróc hoặc phai lớp mạ, các lỗi kỹ thuật khác bắt nguồn từ sản phẩm thì </span>Đăng Quang&nbsp;<span style="font-size:14px">Watch sẽ trực tiếp kiểm tra và đổi mới sản phẩm cho Khách hàng nếu nghiêm trọng.</span></li>
+                            </ol>
+
+                            <h4><strong>7. Các trường hợp không nằm trong phạm vi bảo hành:</strong></h4>
+
+                            <ol style="list-style-type:lower-roman">
+                                <li><span style="font-size:14px">Các lỗi về vỏ và dây của đồng hồ như bong tróc hoặc phai lớp mại, ố mặt số…</span></li>
+                                <li><span style="font-size:14px">Các lỗi rơi vỡ, va đập làm xước kính trong quá trình Khách hàng sử dụng gây ra.</span></li>
+                                <li><span style="font-size:14px">Dây da bị gẫy, nứt hoặc bong.</span></li>
+                                <li><span style="font-size:14px">Không bảo hành cho trường hợp điều chỉnh, sử dụng không đúng cách của người dùng.</span></li>
+                                <li><span style="font-size:14px">Không bảo hành cho đồng hồ đã sửa chữa tại những nơi không phải là trung tâm bảo hành của </span>Đăng Quang&nbsp;<span style="font-size:14px">Watch.</span></li>
+                            </ol>
+
+                            <p><span style="font-size:small">Trong thời gian sử dụng nếu gặp bất kỳ trục trặc nào Khách hàng có thể liên hệ trực tiếp với Trung tâm bảo hành của Hãng hoặc phòng CSKH của Công ty Cổ phần Trực tuyến Đăng Quang để được trợ giúp theo số điện thoại: 0987.68.1189</span></p>
+
+                            <p><span style="font-size:small"><span style="font-family:arial"><span style="font-family:arial">Chúng tôi cam kết bảo hành một cách trung thực nhất đảm bảo quyền lợi cho Quý khách, xin Quý khách vui lòng đọc kỹ các quy định bảo hành ghi ở mặt sau phiếu trước khi thực hiện bảo hành sản phẩm.</span></span></span></p>
+
+                            <p><span style="font-size:small"><span style="font-family:arial">Lưu ý:</span></span></p>
+
+                            <p style="margin-left:0.25in"><span style="font-size:small"><span style="font-family:arial"><!--[if !supportLists]-->-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <!--[endif]-->Khách hàng chịu trách nhiệm cho chi phí vận chuyển đến Trung tâm bảo hành.</span></span></p>
+
+                            <p style="margin-left:0.25in"><span style="font-size:small"><span style="font-family:arial"><!--[if !supportLists]-->-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <!--[endif]-->Hết thời hạn bảo hành, chi phí sửa chữa sẽ được trung tâm bảo hành hỗ trợ với giá ưu đãi nhất.</span></span></p>
+
+                            <p>&nbsp;</p>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="home-tab" data-toggle="tab" href="#description1" role="tab" aria-controls="home" aria-selected="true">Thông số kĩ thuật</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="description1" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="group" >
+                            <div class="item" style="display: flex; padding: 7px; border-bottom: 1px solid #eeeeee">
+                                <p class="text1" style="width:135px;">Đường kính mặt</p>
+                                <p class="text2" style="flex:1"><a href="javascript://" title="">@Model.watch.FaceDiameter mm</a></p>
+                            </div>
+                            <div class="item" style="display: flex; padding: 7px; border-bottom: 1px solid #eeeeee">
+                                <p class="text1" style="width:135px;">Chống nước</p>
+                                <p class="text2" style="flex:1"><a href="javascript://" title="">@Model.watch.WaterProof ATM</a></p>
+                            </div>
+                            <div class="item" style="display: flex; padding: 7px; border-bottom: 1px solid #eeeeee">
+                                <p class="text1" style="width:135px;">Chất liệu mặt</p>
+                                <p class="text2" style="flex:1">@Model.watch.FaceMaterial</p>
+                            </div>
+                            <div class="item" style="display: flex; padding: 7px; border-bottom: 1px solid #eeeeee">
+                                <p class="text1" style="width:135px;">Năng lượng sử dụng</p>
+                                <p class="text2" style="flex:1"> @Model.watch.EnergyUse
+                            </div>
+                            <div class="item" style="display: flex; padding: 7px; border-bottom: 1px solid #eeeeee">
+                                <p class="text1" style="width:135px;">Size dây</p>
+                                <p class="text2" style="flex:1">@Model.watch.Size mm</p>
+                            </div>
+                            <div class="item" style="display: flex; padding: 7px; border-bottom: 1px solid #eeeeee">
+                                <p class="text1" style="width:135px;">Chất liệu dây</p>
+                                <p class="text2" style="flex:1">@Model.watch.StringMaterial </p>
+                            </div>
+                          
+                            <div class="item" style="display: flex; padding: 7px; border-bottom: 1px solid #eeeeee">
+                                <p class="text1" style="width:135px;">Kiểu dáng</p>
+                                <p class="text2" style="flex:1">@Model.watch.TypeWatch.Titel</p>
+                            </div>
+                            <div class="item" style="display: flex; padding: 7px; border-bottom: 1px solid #eeeeee">
+                                <p class="text1" style="width:135px;">Xuất xứ</p>
+                                <p class="text2" style="flex:1">@Model.watch.MadeIn</p>
+                            </div>
+                            <div class="item" style="display: flex; padding: 7px; border-bottom: 1px solid #eeeeee">
+                                <p class="text1" style="width:135px;">Chế độ bảo hành</p>
+                                <p class="text2" style="flex:1">@Model.watch.Insurance</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</section>
+
+<section class="single-room">
+    <div class="single-room-main">
+        <div class="container">
+            <h2 class="title">
+                Đồng hồ khác
+            </h2>
+            <div class="sub-title">
+                Bạn có thể sẽ thích những chiếc đồng hồ khác
+            </div>
+            <div class="single-room-list owl-carousel owl-theme">
+                @foreach (var item in Model.watches)
+                {
+                    <div class="single-room-item">
+                        @if (item.Percent > 0)
+                        {
+                        <span class="sale-percent">Sale @item.Percent%</span>
+                        }
+                        <div class="room-img">
+                            <a href="/@Model.MenuAlias/@item.ID/@item.Alias">
+                                <img src="@item.Image" style="height:379.66px" alt="">
+                            </a>
+                        </div>
+                        <div class="room-holder">
+                            <div class="room-price">
+                                @if (item.Percent > 0)
+                                {
+                                    <div class="wrapper-price">
+                                        <span class="price-suffix">Price :</span>
+                                        <span class="price-sale">@String.Format(format, "{0:c0}", item.PriceDiscount)</span>
+                                        <span class="price-old">- @String.Format(format, "{0:c0}", item.Price)</span>
+                                    </div>
+                                }
+                                else
+                                {
+                            <div class="wrapper-price">
+                                <span class="price-suffix">Price :</span>
+                                <span class="price-sale">@String.Format(format, "{0:c0}", item.Price)</span>
+                            </div>
+                                        }
+                                    </div>
+                                    <p class="room-title">
+                                        <h4>@item.Name  </h4>
+
+                                    </p>
+                                    <ul class="room-reload">
+                                        <li><i class="far fa-rupee"></i><span>@item.TypeWatch</span></li>
+                                        <li><i class="far fa-"></i><span></span></li>
+                                        <li><i class="far fa-bed"></i><span>@item.Quality</span></li>
+                                    </ul>
+
+                                </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,258 @@
+﻿﻿@using ProjectLibrary.Database
+@using Template_WatchShop.Controllers
+@using ProjectLibrary.Config
+@using Template_WatchShop.Models
+@{
+    Watchshop watchshop = CommentController.DetailShop();
+    List<Categary> categaries = CommentController.GetCategaries();
+    List<Slide> slides = CommentController.GetSlides();
+    List<Menu> menus = CommentController.GetMainMenus();
+    List<Menu> menufooter = CommentController.GetSecondMenus();
+    List<Customer> customers = CommentController.GetCustomer();
+
+
+    string homepage = "";
+    if (ViewBag.HomePage == true)
+    {
+        homepage = "home";
+    }
+
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@watchshop.MetaTitle</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="~/wwwroots/bootstrap/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css" />
+    <link href="~/wwwroots/css/style.css" rel="stylesheet" />
+    <link href="~/wwwroots/Common.css" rel="stylesheet" />
+    <link href="~/wwwroots/detailWatch.css" rel="stylesheet" />
+    @RenderSection("css", false)
+
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <header class="header">
+            <div class="header-main">
+                <div class="top-header">
+                    <div class="row">
+                        <div class="col-lg-6" style="display:flex">
+                            <span style="color:azure;">Điện thoại: @watchshop.Tel   Địa chỉ: @watchshop.Address</span>
+
+                        </div>
+                        <div class="search" style="display:flex">
+                            <form class="formsearch" action="/Search" method="get">
+                                <input type="text" name="search" placeholder="Tìm đồng hồ..">
+                                <button type="submit" class="button">Tìm kiếm <i class="far fa-paper-plane"></i></button>
+                            </form>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="top-header__infor right">
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom"></div>
+                <div class="header-content">
+                    <div class="row">
+                        <a href="" class="logo">
+                            <img src="@watchshop.Logo" alt="">
+                        </a>
+                        <nav class="menu">
+                            <ul class="menu-list">
+                                @foreach (var item in menus)
+                                {
+                                    if (item.Type == 1)
+                                    {
+                                        <li class="menu-item current">
+                                            <a href="/@item.Alias" class="menu-link">@item.Title</a>
+                                        </li>
+                                    }
+                                    else if (item.Type == 2)
+                                    {
+                                        <li class="menu-item">
+                                            <a href="/@item.Alias" class="menu-link">@item.Title</a>
+
+                                            <ul class="menuc2">
+                                                @foreach (var item2 in categaries)
+                                                {
+
+
+                                                    <li>
+                                                        <a href="/@item2.Alias">@item2.Titel</a>
+                                                    </li>
+
+                                                }
+                                            </ul>
+
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="menu-item">
+                                            <a href="/@item.Alias" class="menu-link">
+                                                @item.Title
+                                            </a>
+                                        </li>
+                                    }
+                                }
+
+                            </ul>
+                        </nav>
+                        <a href="/Carts" class="btn-book__now">Giỏ hàng: @(Session["count"]==null?0:Session["count"]) Mục</a>
+                        <div class="btn-open-menu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </header>
+        <main class="main">
+            <section class="banner">
+                <div class="banner-main owl-carousel owl-theme">
+
+                    @foreach (var item in slides)
+                    {
+                        <div class="bg-slide">
+                            <img src="@item.Image" alt="">
+                            <div class="bg-slide__cont">
+                                <div class="bg-slide__cont_main">
+                                    <h1> Đồng hồ DuongWatch</h1>
+                                    <p>
+
+                                        Chính hãng - Uy tin - Chất lượng
+                                    </p>
+                                    @*<div class="btn-slide">
+                                        <a href="" class="btn-slide__active btn-view">view room</a>
+                                        <a href="" class="btn-slide__active btn-about">about us</a>
+                                    </div>*@
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+
+
+
+                </div>
+            </section>
+            @RenderBody()
+
+        </main>
+        <section class="room">
+            <h3>Khách hàng của cửa hàng</h3>
+            <div class="room-list owl-carousel owl-theme" >
+                @foreach (var item in customers)
+                {
+
+                    <div class="room-item thumd">
+                        <a href="javascript: void(0)">
+                            <img src="@item.Image" alt="">
+                        </a>
+                        <a data-fancybox href="@item.Image" class="view-room">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                        <h3 class="room-title" style="top:70px;">
+                           
+                            @item.job:<span class="price1">@item.Name</span>
+                        </h3>
+                    </div>
+                }
+                </div>
+            
+
+            </section>
+        <footer class="footer ">
+            <div class="container ">
+                <div class="footer-top ">
+                    <div class="col-md-7 ">
+                        <div class="logo-footer ">
+                            <img src="@watchshop.Image " alt=" ">
+                        </div>
+                        <div class="single-contact ">
+                            <ul>
+                                <li class="col-sm-5 ">
+                                    <label for=" ">
+                                        <i class="fas fa-envelope "></i>
+                                        Địa chỉ Email
+                                    </label>
+                                    <a href="mailto:@watchshop.Email">@watchshop.Email</a>
+                                </li>
+                                <li class="col-sm-3 ">
+                                    <label for=" ">
+                                        <i class="fas fa-phone "></i>
+                                        Số điện thoại
+                                    </label>
+                                    <a href="tel:@watchshop.Tel">@watchshop.Tel</a>
+                                </li>
+                                <li class="col-sm-4 ">
+                                    <label for=" ">
+                                        <i class="fas fa-map-marker "></i>
+                                        Địa chỉ
+                                    </label>
+                                    <a href=" ">@watchshop.Address</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-5 ">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.473663080188!2d105.7329127506242!3d21.053735992231932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345457e292d5bf%3A0x20ac91c94d74439a!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2hp4buHcCBIw6AgTuG7mWk!5e0!3m2!1svi!2s!4v1651047770097!5m2!1svi!2s" width="400" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                    </div>
+                </div>
+                <div class="footer-bottom ">
+                    <div class="col-md-5 left ">
+                        <span>2021 Copyright by Farost</span>
+                    </div>
+                    <div class="col-md-7 right ">
+                        <ul>
+                            @foreach (var item in menufooter)
+                            {
+
+                                <li>
+                                    <a href="/@item.Alias">
+                                        @item.Title
+                                    </a>
+                                </li>
+
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <a href="" id="backtotop"></a>
+
+    </div>
+    <script src="~/wwwroots/js/jquery-3.6.0.min.js"></script>
+    <script src="~/wwwroots/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js "></script>
+    <script src="~/wwwroots/js/style.js"></script>
+
+    @RenderSection("script", false)
+</body>
+
+</html>
+

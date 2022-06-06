@@ -1,0 +1,145 @@
+﻿
+@{
+    Layout = "~/Areas/Administrator/Views/Templates/_LayoutPage.cshtml";
+
+}
+<link href="~/Areas/Administrator/Content/css/bootstrap.min.css" rel="stylesheet">
+<link href="~/Areas/Administrator/Content/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
+      rel="stylesheet">
+<link href="~/Areas/Administrator/Content/css/font-awesome.css" rel="stylesheet">
+<link href="~/Areas/Administrator/Content/css/style.css" rel="stylesheet">
+<link href="~/Areas/Administrator/Content/css/pages/dashboard.css" rel="stylesheet">
+<link href="~/Scripts/jtable/themes/lightcolor/blue/jtable.css" rel="stylesheet" />
+<link href="~/Areas/Administrator/Content/css/jquery-ui.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Areas/Administrator/Content/media/system/css/validationEngine.jquery.css" type="text/css" />
+<link href="~/Areas/Administrator/Content/media/system/css/ui.notify.css" rel="stylesheet" />
+
+
+
+<script src="~/Scripts/jquery-1.9.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.9.2.min.js"></script>
+<script src="~/Areas/Administrator/Content/media/system/js/jquery.notify.js"></script>
+<script src="~/Areas/Administrator/Content/media/system/js/JavaScript.js"></script>
+
+
+<script src="~/Scripts/jtable/jquery.jtable.js"></script>
+<script src="~/ckfinder/ckfinder.js"></script>
+<script src="~/ckeditor/ckeditor.js"></script>
+<script src="~/Scripts/JavaScript1.js"></script>
+<div class="optionShow">
+    <div class="item-option">
+        <div class="title-item-option">Từ ngày :</div>
+        <div class="content-item-option"><input type="text" id="check-in" value="@Session["Checkin"]"/></div>
+    </div>
+    <div class="item-option">
+        <div class="title-item-option">Đến ngày :</div>
+        <div class="content-item-option"><input type="text" id="check-out" value="@Session["Checkout"]"/></div>
+    </div>
+
+    <div class="item-option">
+        <div class="title-item-option"><input type="button" class="btn-primary" value="Lọc" id="search" /></div>
+    </div>
+
+</div>
+
+<div id="jtable-main-container"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#jtable-main-container').jtable({
+            title: '@ViewBag.Title',
+
+            selectingCheckboxes: true, //Show checkboxes on first column
+            columnResizable: true, //Actually, no need to set true since it's default
+            columnSelectable: true, //Actually, no need to set true since it's default
+            saveUserPreferences: true, //Actually, no need to set true since it's default
+
+
+            actions: {
+                listAction: '@Url.Action("ListOrderShipping", "Order")',
+
+            },
+            fields: {
+                ID: {
+                    key: true,
+                    create: false,
+                    edit: false,
+                    list: false
+                },
+                Code: {
+                    title: 'Code',
+                    width: '5%',
+                    sorting: false,
+                    display: function (data) {
+                        return '<a href="/admin/Order/Detail/' + data.record.ID + '">' + data.record.Code + '</a>';
+
+                    }
+                },
+                FullName: {
+                    title: 'Họ tên',
+                    width: '6%',
+                    sorting: false
+                },
+
+                DateBook: {
+                    title: 'Ngày đặt hàng',
+                    width: '5%',
+                    sorting: false,
+                    displayFormat: 'yy-mm-dd'
+                },
+
+                InfoBooking: {
+                    title: 'Thông tin đặt phòng',
+                    width: '15%',
+                    sorting: false
+                },
+
+                TotalMoney: {
+                    title: 'Giá',
+                    width: '15%',
+                    sorting: false
+                },
+
+                Completed: {
+                    title: 'Đơn hàng',
+                    width: '8%',
+                    type: 'checkbox',
+                    values: { 0: 'Đã nhận đơn', 1: 'Đang giao hàng', 2: 'Đã thanh toán', 3: 'Đơn bị hủy', 4: 'Khách đổi đơn hoặc đơn chưa giao khách hủy đơn' },
+                    defaultValue: 1
+                },
+
+            },
+
+
+        });
+
+        $('#jtable-main-container').jtable('load', { bookingOnline: '@ViewBag.BookingOnline' });
+
+    });
+
+
+
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#check-in").datepicker();
+        $("#check-out").datepicker();
+        $("#book-date").datepicker();
+    });
+    function detailRecord(Id) {
+        window.location = '@Url.Action("Detail","BookRoom")' + '/' + Id;
+    }
+
+    $("#search").click(function () {
+
+        $('#jtable-main-container').jtable('load', { checkin: $("#check-in").val(), checkout: $("#check-out").val(), bookdate: $("#book-date").val() });
+    });
+</script>
+<br />
+@using (Html.BeginForm("ExportPDF3", "Order"))
+{
+    <input type="submit" class="btn-quantity plus" value="Export PDF" />
+
+}

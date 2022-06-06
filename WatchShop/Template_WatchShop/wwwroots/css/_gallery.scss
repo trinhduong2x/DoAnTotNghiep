@@ -1,0 +1,79 @@
+section.gallery {
+    padding: 100px 0;
+    .title-gallery {
+        text-align: center;
+        .title {
+            font-size: 25px;
+            letter-spacing: 0.022em;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 100px;
+            color: #222;
+        }
+    }
+    .grid-gallery {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        .grid-item {
+            padding: 15px;
+            .grid-item__cont {
+                position: relative;
+                display: inline-block;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: all 500ms linear 0ms;
+                }
+                .item-holder {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    transition: all 500ms linear 0ms;
+                    .icon-zoom {
+                        border-radius: 50%;
+                        display: inline-block;
+                        font-size: 20px;
+                        width: 63px;
+                        height: 63px;
+                        line-height: 63px;
+                        text-align: center;
+                        color: #222;
+                        background-color: #fff;
+                        margin-right: 2px;
+                        margin-left: 2px;
+                        opacity: 0;
+                        transition: all 500ms linear 0ms;
+                    }
+                }
+                &::before {
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background: #222;
+                    opacity: 0;
+                    transition: all 500ms linear 0ms;
+                }
+                &:hover {
+                    .icon-zoom {
+                        opacity: 1;
+                        transition: all 500ms linear 0ms;
+                    }
+                    &::before {
+                        opacity: 0.7;
+                        transition: all 500ms linear 0ms;
+                    }
+                }
+            }
+        }
+    }
+    @media(max-width:991px) {
+        padding: 70px 0;
+    }
+    @media(max-width:768px) {
+        padding: 30px 0;
+    }
+}

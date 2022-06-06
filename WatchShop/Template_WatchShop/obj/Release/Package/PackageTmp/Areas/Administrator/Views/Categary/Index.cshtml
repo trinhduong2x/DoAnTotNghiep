@@ -1,0 +1,81 @@
+﻿@model ProjectLibrary.Database.Watchshop
+@{
+    Layout = "/Areas/Administrator/Views/Templates/_LayoutPage.cshtml";
+}
+
+<form action="@Url.Action("UpdateIndex", "Categary")" method="POST" id="updateIndex">
+    <div id="jtable-main-container"></div>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#jtable-main-container').jtable({
+            title: '@ViewBag.Title',
+            paging: true, //Enable paging
+            pageSize: 40, //Set page size (default: 10)
+            sorting: true, //Enable sorting
+            selecting: true, //Enable selecting
+            multiselect: true, //Allow multiple selecting
+            selectingCheckboxes: true, //Show checkboxes on first column
+            columnResizable: false, //Actually, no need to set true since it's default
+            columnSelectable: true, //Actually, no need to set true since it's default
+            saveUserPreferences: false, //Actually, no need to set true since it's default
+             toolbar: {
+                items: [{
+                    icon: '/Areas/Administrator/Content/img/add.png',
+                    text: 'Thêm mới',
+                    click: function () {
+                        window.location = '@Url.Action("Create", "Categary")';
+                    }
+                }]
+            },
+            actions: {
+                listAction: '@Url.Action("List", "Categary")',
+                deleteAction: '@Url.Action("Delete", "Categary")',
+            },
+            fields: {
+                ID: {
+                    key: true,
+                    create: false,
+                    edit: false,
+                    list: false
+                },
+                Titel: {
+                    title: 'Tên hãng',
+                    width: '15%',
+                    inputClass: 'full-width',
+                    sorting: false,
+                },
+                Image: {
+                     title: 'Ảnh đại diện',
+                    width: '8%',
+                    display: function (data) {
+                        return '<img src="' + data.record.Image + '" width="60px" height="60px"/>';
+                    },
+                    inputClass: 'upload'
+                },
+               
+                '':
+                {
+                    title: '',
+                    width: '2%',
+                    sorting: false,
+                    display: function (data) {
+                        return '<button title="Edit" type="button" class="jtable-command-button jtable-edit-command-button" onclick="editRecord(' + data.record.ID + ')"><span>Edit</span></button>';
+                    }
+                }
+
+            },
+        });
+        //Load data
+        $('#jtable-main-container').jtable('load');
+    });
+
+</script>
+<script>
+
+    function editRecord(advId) {
+        window.location = '@Url.Action("Update","Categary")' + '/' + advId;
+    }
+
+</script>

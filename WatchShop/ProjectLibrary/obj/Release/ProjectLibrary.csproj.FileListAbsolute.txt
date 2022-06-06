@@ -1,0 +1,12 @@
+D:\DoAnTotNghiep\WatchShop\ProjectLibrary\bin\Release\ProjectLibrary.dll.config
+D:\DoAnTotNghiep\WatchShop\ProjectLibrary\bin\Release\ProjectLibrary.dll
+D:\DoAnTotNghiep\WatchShop\ProjectLibrary\bin\Release\ProjectLibrary.pdb
+D:\DoAnTotNghiep\WatchShop\ProjectLibrary\bin\Release\EntityFramework.dll
+D:\DoAnTotNghiep\WatchShop\ProjectLibrary\bin\Release\EntityFramework.SqlServer.dll
+D:\DoAnTotNghiep\WatchShop\ProjectLibrary\bin\Release\EntityFramework.xml
+D:\DoAnTotNghiep\WatchShop\ProjectLibrary\bin\Release\EntityFramework.SqlServer.xml
+D:\DoAnTotNghiep\WatchShop\ProjectLibrary\obj\Release\ProjectLibrary.csproj.AssemblyReference.cache
+D:\DoAnTotNghiep\WatchShop\ProjectLibrary\obj\Release\ProjectLibrary.csproj.CoreCompileInputs.cache
+D:\DoAnTotNghiep\WatchShop\ProjectLibrary\obj\Release\ProjectLibrary.csproj.CopyComplete
+D:\DoAnTotNghiep\WatchShop\ProjectLibrary\obj\Release\ProjectLibrary.dll
+D:\DoAnTotNghiep\WatchShop\ProjectLibrary\obj\Release\ProjectLibrary.pdb

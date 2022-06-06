@@ -1,0 +1,73 @@
+﻿@using ProjectLibrary.Database
+@{
+    Layout = null;
+    var products = Session["products"] as List<Order>;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ListProduct</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+
+
+<body>
+    <div class="optionShow" style="display:flex; align-content:center">
+        <b><h4>Thống kê tất cả đơn hàng đang chờ xác nhận</h4></b>
+        <div class="item-option" style="display:flex">
+            <div class="title-item-option">Từ ngày: @Session["Checkin"]</div>
+        </div>
+        <div class="item-option" style="display:flex">
+            <div class="title-item-option">Đến ngày: @Session["Checkout"]</div>
+        </div>
+
+
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>  </th>
+                <th>  </th>
+                <th><h3>Tổng tiền</h3></th>
+                <th><h4>@Session["Total"] VNĐ</h4> </th>
+                <th><h3></h3></th>
+
+            </tr>
+            <tr>
+                <th>Code</th>
+                <th>Họ tên</th>
+                <th>Ngày đặt hàng</th>
+                <th>Thông tin đơn hàng</th>
+                <th>Giá</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in products)
+            {
+                <tr>
+                    <td>@item.Code</td>
+                    <td>
+                        @item.FullName
+                    </td>
+                    <td>@item.DateOrder</td>
+                    <td>@item.InfoBooking</td>
+                    <td>@item.TotalMoney</td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+
+
+</body>
+</html>
+

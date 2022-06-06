@@ -1,0 +1,98 @@
+﻿@using ProjectLibrary.Database
+@using Template_WatchShop.Controllers
+@model PagedList.IPagedList<Template_WatchShop.Models.ShowObject>
+
+@using PagedList.Mvc
+@{
+    var menu = ViewBag.Menu;
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+<style>
+    .pagination li {
+        padding: 5px;
+        width: 25px;
+        border: 1px solid black;
+        font-size:18px;
+    }
+</style>
+<section class="list-room">
+    <div style="display:flex">
+        <h4>Những sản phẩm hiện có</h4> &nbsp; &nbsp;
+        <a href="/SearchType/@menu.Alias/1" style="width:122px; height:20px;background-color:wheat;justify-content:center"><h5 style="color:blueviolet">Đồng hồ nam</h5></a> &nbsp;&nbsp;&nbsp;
+        <a href="/SearchType/@menu.Alias/4" style="width:110px; height:20px;background-color:wheat;justify-content:center"><h5 style="color:blueviolet">Đồng hồ nữ</h5></a>
+
+    </div>
+    <div>
+        <div style="float:right">
+            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+            {
+                <p>
+                    Xem: @Html.DropDownList("size", (List<SelectListItem>)ViewBag.size, new { @onchange = "this.form.submit();" })Sản phẩm
+                </p>
+            }
+        </div>
+        <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-right">
+            Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+            <ul style="padding:5px;">
+
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, size = ViewBag.currentSize }))
+            </ul>
+        </div>
+
+        <div class="container">
+
+            <div class="room-main">
+
+
+            </div>
+            <div class="row">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 room-item">
+                        <div class="thumd">
+                            <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                <img style="width:410px;height:300px;" src="@item.Image" alt="">
+                            </a>
+                            @if (item.Percent > 0)
+                            {
+                                <h3 class="room-title">
+                                    <span>Sale:</span>
+                                    <span class="price1">@item.Percent%</span>
+                                </h3>
+                            }
+                        </div>
+                        <div class="desc">
+                            <h3 class="entry-name">
+                                @item.Name - @item.TypeWatch
+                            </h3>
+                            <div class="excrept">
+                                @if (item.Percent > 0)
+                                {
+                                    <p>
+                                        <b>@String.Format(format, "{0:c0}", item.PriceDiscount)</b> - <strike>@item.Price</strike>Đ
+                                        <br />
+                                        <b>Còn: @item.Quality Chiếc</b>
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p>
+                                        <b>@String.Format(format, "{0:c0}", item.Price)</b>
+                                        <br />
+                                        <b>Còn: @item.Quality Chiếc</b>
+                                    </p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+</section>
+

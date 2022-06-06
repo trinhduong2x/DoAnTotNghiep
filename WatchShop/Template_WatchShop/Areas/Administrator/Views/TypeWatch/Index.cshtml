@@ -1,0 +1,59 @@
+﻿@model Template_WatchShop.Areas.Administrator.EntityModel.ETypeWatch
+@{
+    Layout = "/Areas/Administrator/Views/Templates/_LayoutPage.cshtml";
+}
+<div id="jtable-main-container"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#jtable-main-container').jtable({
+            title: '@ViewBag.Title',
+            paging: true, //Enable paging
+            pageSize: 5, //Set page size (default: 10)
+            sorting: true, //Enable sorting
+            selecting: true, //Enable selecting
+            multiselect: true, //Allow multiple selecting
+            selectingCheckboxes: true, //Show checkboxes on first column
+            columnResizable: false, //Actually, no need to set true since it's default
+            columnSelectable: true, //Actually, no need to set true since it's default
+            saveUserPreferences: false, //Actually, no need to set true since it's default
+
+
+            actions: {
+                listAction: '@Url.Action("List", "TypeWatch")',
+                createAction: '@Url.Action("Create", "TypeWatch")',
+                updateAction: '@Url.Action("Edit", "TypeWatch")',
+                deleteAction: '@Url.Action("Delete", "TypeWatch")',
+            },
+            fields: {
+                ID: {
+                    key: true,
+                    create: false,
+                    edit: false,
+                    list: false
+                },
+                Title: {
+                    title: '@Html.DisplayNameFor(c=>c.Title)',
+                    width: '10%',
+                    inputClass: 'full-width',
+                },
+                
+                Status: {
+                    title: '@Html.DisplayNameFor(c => c.Status)',
+                    width: '8%',
+                    type: 'checkbox',
+                    values: { 'false': 'Không', 'true': 'Có' },
+                    defaultValue: 'true'
+                },
+            },
+            deleteConfirmation: function (data) {
+                data.deleteConfirmMessage = 'Bạn có chắc chắn xóa người dùng này không ?';
+            },
+
+        });
+        //Load data
+        $('#jtable-main-container').jtable('load');
+
+    });
+</script>
+
+

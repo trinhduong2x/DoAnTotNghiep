@@ -1,0 +1,360 @@
+section.list-room {
+    padding: 100px 0;
+    .row {
+        margin: 0 -15px;
+    }
+    .room-item {
+        .thumd {
+            position: relative;
+            overflow: hidden;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: all 0.3s linear;
+                &:hover {
+                    transform: scale(1.1);
+                    transition: all 0.3s linear;
+                }
+            }
+            .room-title {
+                position: absolute;
+                top: 25px;
+                left: 25px;
+                font-size: 18px;
+                line-height: 32px;
+                padding: 6px 15px;
+                background-color: #222;
+                color: #fff;
+                font-family: "Renner Medium";
+                .price1 {
+                    color: #c5a47e;
+                }
+            }
+        }
+        .desc {
+            padding: 25px;
+            text-align: center;
+            .entry-name {
+                font-size: 20px;
+                color: #222;
+                line-height: 24px;
+                margin-bottom: 20px;
+            }
+        }
+    }
+    .grid-room-grapper {
+        padding: 50px 0;
+        .grid-room-view {
+            display: flex;
+            flex-wrap: wrap;
+            max-height: 560px;
+            .col-view {
+                width: 50%;
+            }
+            .view-desc {
+                padding: 40px;
+                position: relative;
+                font-size: 17px;
+                color: #ededed;
+                background-color: #222;
+                .entry-title {
+                    font-size: 35px;
+                    letter-spacing: 0.03em;
+                    color: #fff;
+                    margin-bottom: 30px;
+                }
+                .wrapper-price {
+                    margin-bottom: 30px;
+                    .price-label {
+                        color: #fff;
+                    }
+                    .price {
+                        font-size: 35px;
+                        font-family: 'Renner Semibold';
+                        color: #c5a47e;
+                    }
+                    .price-suffix {
+                        font-family: 'Renner Book';
+                        font-size: 25px;
+                        color: #c5a47e;
+                    }
+                }
+                .room-meta {
+                    margin-bottom: 50px;
+                }
+                .btn-book-now {
+                    display: inline-block;
+                    white-space: nowrap;
+                    letter-spacing: 0.1em;
+                    font-size: 16px;
+                    line-height: 43px;
+                    font-family: 'Renner Medium';
+                    text-transform: uppercase;
+                    padding: 0 28px;
+                    text-align: center;
+                    background: #c5a47e;
+                    color: #fff;
+                }
+            }
+            .view-thumd {
+                height: 560px;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            @media(max-width:768px) {
+                flex-direction: column;
+                flex-wrap: nowrap;
+                max-height: none;
+                .col-view {
+                    width: 100%;
+                }
+                .view-desc {
+                    order: 2;
+                }
+                .view-thumd {
+                    height: 30vh;
+                    order: 1;
+                }
+            }
+        }
+    }
+    @media(max-width:991px) {
+        padding: 70px 0;
+    }
+    @media(max-width:768px) {
+        padding: 30px 0;
+    }
+}
+
+section.infor-room {
+    padding: 70px 0;
+    .row {
+        align-items: flex-start;
+    }
+    .nav-tabs {
+        li.nav-item {
+            margin-right: 60px;
+            display: inline-block;
+            font-size: 18px;
+            line-height: 54px;
+            text-transform: uppercase;
+            font-family: 'Renner Medium';
+            a {
+                color: #222;
+                border: none;
+                padding: 0;
+                position: relative;
+                &::before {
+                    content: "";
+                    height: 3px;
+                    display: block;
+                    background: #c5a47e;
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    opacity: 0;
+                    width: 100%;
+                    transition: all 500ms linear 0ms;
+                }
+                &:hover {
+                    color: #c5a47e;
+                }
+            }
+            a.nav-link.active {
+                color: #c5a47e;
+                &::before {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    .tab-content {
+        margin-top: 50px;
+        #description {
+            .text-custom {
+                font-family: 'Renner Medium I';
+                color: #222;
+                line-height: 26px;
+                font-size: 17px;
+                margin-bottom: 18px;
+            }
+            .row-service-extra {
+                margin-top: 50px;
+                .service-extra {
+                    .title-service-room {
+                        text-transform: capitalize;
+                        font-size: 20px;
+                        font-family: 'Renner Book';
+                        font-weight: 600;
+                        margin-bottom: 10px;
+                        padding-top: 16px;
+                        padding-bottom: 15px;
+                        img {
+                            margin-right: 20px;
+                        }
+                    }
+                    .list-service-room {
+                        li {
+                            position: relative;
+                            padding-left: 17px;
+                            color: #222;
+                            font-family: 'Renner Book';
+                            line-height: 35px;
+                            &::before {
+                                position: absolute;
+                                font-size: 15px;
+                                font-family: "FontAwesome";
+                                content: "\f105";
+                                color: inherit;
+                                top: 0;
+                                left: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .room-meta {
+        padding: 63px 30px 45px;
+        background-color: #222;
+        margin-top: 45px;
+        color: #fff;
+        &-price {
+            margin-bottom: 45px;
+            .price-label {
+                font-size: 17px;
+                margin-right: 5px;
+            }
+            .price {
+                font-size: 50px;
+                font-family: 'Renner Semibold';
+            }
+            .price-suffix {
+                font-size: 25px;
+                font-family: 'Renner Book';
+            }
+        }
+        &-btn {
+            margin: 12px 0 45px;
+            .btn-book-now {
+                color: #fff;
+                text-align: center;
+                width: 100%;
+                letter-spacing: 0.1em;
+                display: block;
+                height: 45px;
+                font-size: 13px;
+                text-transform: uppercase;
+                line-height: 45px;
+                font-family: 'Renner Medium';
+                background-color: #c5a47e;
+            }
+        }
+        &-item {
+            li {
+                label {
+                    margin-right: 5px;
+                    color: #c5a47e;
+                }
+            }
+        }
+    }
+    @media(max-width:768px) {
+        padding: 30px 0;
+    }
+}
+
+section.single-room {
+    padding: 50px 0;
+    .single-room-main {
+        .title {
+            font-size: 45px;
+            margin-bottom: 10px;
+            padding-bottom: 0px;
+        }
+        .sub-title {
+            font-size: 17px;
+            text-transform: uppercase;
+        }
+        .single-room-list {
+            .single-room-item {
+                position: relative;
+                .sale-percent {
+                    position: absolute;
+                    top: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    height: 35px;
+                    line-height: 35px;
+                    padding-left: 25px;
+                    padding-right: 25px;
+                    color: #fff;
+                    transition: all 300ms linear 0ms;
+                    background: #c5a47e;
+                    border-radius: 0 0 10px 10px;
+                }
+                .room-holder {
+                    border: 1px solid #d8d8d8;
+                    text-align: center;
+                    padding: 0 30px 26px;
+                    .room-price {
+                        position: relative;
+                        top: -15px;
+                        margin-bottom: 13px;
+                        .wrapper-price {
+                            box-shadow: 0 0 13px rgb(0 0 0 / 15%);
+                            padding: 8px 20px;
+                            display: inline-block;
+                            color: #222;
+                            background-color: #fff;
+                            font-family: 'Renner Book';
+                            .price-old,
+                            .price-sale {
+                                color: #c5a47e;
+                            }
+                            .price-old {
+                                text-decoration: line-through;
+                            }
+                        }
+                    }
+                    .room-title {
+                        font-size: 20px;
+                        margin-bottom: 13px;
+                    }
+                    .room-reload {
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 20px;
+                        justify-content: space-between;
+                        i {
+                            margin-right: 15px;
+                        }
+                    }
+                    .room-excerpt {
+                        margin-bottom: 15px;
+                    }
+                    .btn-book-now {
+                        text-transform: uppercase;
+                        font-weight: 500;
+                        font-size: 13px;
+                        font-family: 'Renner Medium';
+                        border-bottom: 1px solid;
+                        color: #222;
+                    }
+                }
+                &:hover {
+                    box-shadow: 0 0 35px rgba(0, 0, 0, 0.15);
+                    .sale-percent {
+                        background-color: #222;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}
